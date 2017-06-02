@@ -6,6 +6,7 @@ import cv2
 
 # face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_cascade = cv2.CascadeClassifier('faces.xml')
+right_eye = cv2.CascadeClassifier('righteye.xml')
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -31,7 +32,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     for (x, y, w, h) in faces:
         image = cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 1)
-        
+        roi_gray = gray[y:y+h,x:x+w]
+        roi_color = image[y:y+h,x:x+w]
+        eyes = right_eye.detectMultiScale(roi_gray)
+        print "right eye foound"
+        for (ex,ey,ew,eh) in eyes:
+            cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,255),1)
 
     # show the frame
     cv2.imshow("Frame", image)
