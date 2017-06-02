@@ -37,10 +37,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         roi_color = image[y:y+h,x:x+w]
         eyes = eyes_cascade.detectMultiScale(roi_gray)
         nose = nose_cascade.detectMultiScale(roi_gray)
-        if nose:
-            print "Nose found"
-        if eyes:
-            print "Eyes found"
+        # if nose:
+        #     print "Nose found"
+        # if eyes:
+        #     print "Eyes found"
         for (ex,ey,ew,eh) in eyes:
             cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,255),1)
         for (nx,ny,nw,nh) in nose:
