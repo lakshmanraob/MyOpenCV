@@ -6,10 +6,6 @@ import cv2
 
 # face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_cascade = cv2.CascadeClassifier('faces.xml')
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-
-test = face_cascade.load('/home/pi/opencv-3.2.0/data/haarcascades/haarcascade_frontalface_default.xml')
-eyetest = eye_cascade.load('/home/pi/opencv-3.2.0/data/haarcascades/haarcascade_eye.xml')
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -31,15 +27,15 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-    print faces
+    print faces.length
     
     for (x, y, w, h) in faces:
-        image = cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        roi_gray = gray[y:y + h, x:x + w]
-        roi_color = image[y:y + h, x:x + w]
-    	eyes = eye_cascade.detectMultiScale(roi_gray)
-    	for (ex, ey, ew, eh) in eyes:
-        	cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0),1)
+        image = cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 1)
+        # roi_gray = gray[y:y + h, x:x + w]
+        # roi_color = image[y:y + h, x:x + w]
+    	# eyes = eye_cascade.detectMultiScale(roi_gray)
+    	# for (ex, ey, ew, eh) in eyes:
+        	# cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0),1)
 
     # show the frame
     cv2.imshow("Frame", image)
