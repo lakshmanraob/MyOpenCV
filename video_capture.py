@@ -27,7 +27,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-    print faces.length
+    print "Found {0} face".format(len(faces))
     
     for (x, y, w, h) in faces:
         image = cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 1)
