@@ -27,7 +27,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # gray
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(30, 30))
     print "Found {0} face".format(len(faces))
 
     for (x, y, w, h) in faces:
@@ -35,7 +35,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         roi_gray = gray[y:y+h,x:x+w]
         roi_color = image[y:y+h,x:x+w]
         eyes = right_eye.detectMultiScale(roi_gray)
-        print "right eye foound"
+        print "right eye found"
         for (ex,ey,ew,eh) in eyes:
             cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,255),1)
 
